@@ -7,20 +7,16 @@
 	padding: 0px 20px;
 }
 
-.sun_mode {
-	background: white;
-	color: black;
-}
-
 .mode {
-	background-color: inherit;
+	background-color: transparent;
 	font-size: 1.3rem;
 	margin: 0.5rem;
-	color: white;
+	color: var(--color-text);
 	transition: all 150ms ease-out;
 }
 
 .mode:hover {
+	transform: scale(1.2);
 	color: var(--color-accent);
 }
 
@@ -35,12 +31,14 @@
 	text-transform: capitalize;
 	font-weight: bold;
 	color: var(--color-accent);
-	opacity: 0.8;
+	opacity: 0.85;
+	filter: brightness(115%);
 }
 
 .menu:hover,
 .menu.cur:hover {
-	opacity: 1.2;
+	transform: scale(1.2);
+	opacity: 1.5;
 }
 
 .menu.cur::after {

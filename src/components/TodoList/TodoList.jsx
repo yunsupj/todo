@@ -1,14 +1,14 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import AddTodo from "../AddTodo/AddTodo";
 import Todo from "../Todo/Todo";
 import styles from "./TodoList.module.css";
 
 export default function TodoList({ curMenu }) {
-	const [todos, setTodos] = useState([]);
+	const [todos, setTodos] = useState(() => readTodos());
 
 	const handleAdd = (todo) => {
-		let newTodo = todo;
-		setTodos([...todos, newTodo]);
+		setTodos([...todos, todo]);
 	};
 
 	const handleDelete = (todo) => {
@@ -18,6 +18,10 @@ export default function TodoList({ curMenu }) {
 	const handleUpdate = (todo) => {
 		setTodos(todos.map((t) => (t.id === todo.id ? todo : t)));
 	};
+
+	useEffect(() => {
+		localStorage.setItem("todos", JSON.stringify(todos));
+	}, [todos]);
 
 	const filteredTodos = getFilterTodos(todos, curMenu);
 
@@ -41,9 +45,10 @@ export default function TodoList({ curMenu }) {
 function getFilterTodos(todos, curMenu) {
 	if (curMenu === "all") {
 		return todos;
-	} else if (curMenu === "active") {
-		return todos.filter((todo) => todo.status === curMenu);
-	} else {
-		return todos.filter((todo) => todo.status === curMenu);
 	}
+	return todos.filter((todo) => todo.status === curMenu);
+}
+
+function readTodos() {
+	return JSON.parse(localStorage.getItem("todos"));
 }

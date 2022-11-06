@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./Header.module.css";
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
-import { DarkModeContext } from "../../context/DarkModeContext";
+import { useDarkMode } from "../../context/DarkModeContext";
 
 export default function Header({ menus, curMenu, setCurMenu }) {
-	const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+	const { darkMode, toggleDarkMode } = useDarkMode();
 
 	const handleClick = (e) => {
 		e.preventDefault();
@@ -12,8 +12,6 @@ export default function Header({ menus, curMenu, setCurMenu }) {
 	};
 
 	const handleDarkMode = () => {
-		// console.log("element>>", element[0].classList.value);
-		// document.documentElement.setAttribute("mode", "dark");
 		toggleDarkMode();
 	};
 
